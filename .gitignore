@@ -1,0 +1,19 @@
+# Flutter related files
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.dart_tool/
+*.lock
+
+# API keys & sensitive files
+.env
+keys.json
+
+# VS Code & JetBrains IDE
+.vscode/
+.idea/
+
+# Logs & OS-specific files
+*.log
+.DS_Store
