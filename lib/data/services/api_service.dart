@@ -1,23 +1,27 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import '../models/movie_collection_model.dart';
 
 class ApiService {
-  static final String _apiKey = dotenv.env['TMDB_API_KEY']!;
   static const String _baseUrl = "https://api.themoviedb.org/3";
+  static final String _apiKey = dotenv.env['TMDB_API_KEY'] ?? '';
 
-  static Future<Map<String, dynamic>> fetchData(String endpoint) async {
-    final url = Uri.parse("$_baseUrl/$endpoint?api_key=$_apiKey");
+  static Future<MovieCollection> fetchMovies(String category) async {
+    final uri = Uri.parse('$_baseUrl/movie/$category?api_key=$_apiKey');
 
     try {
-      final response = await http.get(url);
+      final response = await http.get(uri);
+
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        final jsonData = json.decode(response.body);
+        return MovieCollection.fromJson(jsonData);
       } else {
-        throw Exception("Failed to load data: ${response.statusCode}");
+        throw Exception(
+            "Error ${response.statusCode}: ${response.reasonPhrase}");
       }
-    } catch (error) {
-      throw Exception("Error fetching data: $error");
+    } catch (e) {
+      throw Exception("Failed to fetch movies: $e");
     }
   }
 }
