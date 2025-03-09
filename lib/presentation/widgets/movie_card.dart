@@ -17,6 +17,7 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final double cardHeight = height ?? 300;
     final double cardWidth = cardHeight * aspectRatio;
+    final theme = Theme.of(context);
 
     return Container(
       height: cardHeight,
@@ -26,7 +27,7 @@ class MovieCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: theme.colorScheme.surface.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -62,7 +63,7 @@ class MovieCard extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withOpacity(0.8),
+                    theme.colorScheme.surface.withOpacity(0.8),
                   ],
                 ),
               ),
@@ -81,12 +82,8 @@ class MovieCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '⭐ ${movie.voteAverage}',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: cardHeight * 0.045,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    '⭐ ${movie.voteAverage.toInt()} (${movie.voteCount})',
+                    style: theme.textTheme.labelSmall,
                   ),
 
                   // Movie Title
