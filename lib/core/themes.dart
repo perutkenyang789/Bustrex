@@ -10,6 +10,9 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: primaryColor,
       secondary: accentColor,
+      tertiary: ratingColor,
+      surface: backgroundColor,
+      onPrimary: textColor,
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.bebasNeue(
@@ -26,17 +29,18 @@ class AppTheme {
         fontSize: 16,
         color: textColor,
       ),
-      labelSmall: GoogleFonts.orbitron(
+      labelSmall: GoogleFonts.poppins(
         fontSize: 14,
-        color: ratingColor,
+        fontWeight: FontWeight.bold,
+        color: accentColor,
       ),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
       elevation: 0,
-      titleTextStyle: GoogleFonts.poppins(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
+      titleTextStyle: GoogleFonts.orbitron(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
         color: textColor,
       ),
     ),
