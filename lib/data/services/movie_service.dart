@@ -6,7 +6,6 @@ class MovieService {
     try {
       return await ApiService.fetchMovies(category);
     } catch (e) {
-      print("MovieService error: $e");
       return MovieCollection(
           page: 1, movies: [], totalPages: 0, totalMovies: 0);
     }
