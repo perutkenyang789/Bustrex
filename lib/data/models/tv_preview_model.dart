@@ -1,4 +1,4 @@
-class Result {
+class TvPreview {
   bool adult;
   String backdropPath;
   List<int> genreIds;
@@ -14,7 +14,7 @@ class Result {
   double voteAverage;
   int voteCount;
 
-  Result({
+  TvPreview({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -31,7 +31,7 @@ class Result {
     required this.voteCount,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory TvPreview.fromJson(Map<String, dynamic> json) => TvPreview(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
