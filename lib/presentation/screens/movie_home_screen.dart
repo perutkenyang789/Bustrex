@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../../data/services/movie_detail_service.dart';
 import '../../data/services/movie_reccomendation_service.dart';
 import '../../data/services/movie_service.dart';
-import '../../data/services/trending_service.dart';
+import '../../data/services/movie_trending_service.dart';
 import '../../data/models/movie_collection_model.dart';
 import '../widgets/movie_card.dart';
 import '../widgets/appbar.dart';

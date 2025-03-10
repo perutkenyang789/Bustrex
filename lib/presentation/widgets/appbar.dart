@@ -8,7 +8,6 @@ class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
       height: preferredSize.height,
@@ -22,6 +21,10 @@ class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text(
+                  "BUSTREX",
+                  style: theme.textTheme.displayLarge,
+                ),
                 IconButton(
                   icon: Icon(Icons.person,
                       color: theme.colorScheme.onPrimary, size: 24),
@@ -32,40 +35,6 @@ class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
                             builder: (context) => ProfileScreen()));
                   },
                 ),
-                Text(
-                  "BUSTREX",
-                  style: theme.textTheme.displayLarge,
-                ),
-                Icon(Icons.search,
-                    color: theme.colorScheme.onPrimary, size: 24),
-              ],
-            ),
-          ),
-
-          // Movie/Tv Series Navigation Section
-          Container(
-            width: screenWidth,
-            color: theme.colorScheme.secondary,
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      "MOVIE",
-                      style: theme.appBarTheme.titleTextStyle,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      "TV SERIES",
-                      style: theme.appBarTheme.titleTextStyle,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -75,6 +44,5 @@ class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(100); // Slightly reduced height
+  Size get preferredSize => const Size.fromHeight(60);
 }
