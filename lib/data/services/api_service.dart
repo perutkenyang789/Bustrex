@@ -7,8 +7,8 @@ class ApiService {
   static const String _baseUrl = "https://api.themoviedb.org/3";
   static final String _apiKey = dotenv.env['TMDB_API_KEY'] ?? '';
 
-  static Future<MovieCollection> fetchMovies(String category) async {
-    final uri = Uri.parse('$_baseUrl/movie/$category?api_key=$_apiKey');
+  static Future<MovieCollection> fetchData(String category) async {
+    final uri = Uri.parse('$_baseUrl/$category?api_key=$_apiKey');
 
     try {
       final response = await http.get(uri);
