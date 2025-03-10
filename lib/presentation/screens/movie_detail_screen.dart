@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bustrex/data/models/movie_detail_model.dart';
 import 'package:bustrex/core/constants.dart';
 import '../../data/models/movie_collection_model.dart';
+import '../../data/services/movie_detail_service.dart';
+import '../../data/services/movie_reccomendation_service.dart';
 import '../widgets/movie_card.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -146,20 +148,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: theme.colorScheme.secondary,
-                foregroundColor:
-                    theme.colorScheme.onSecondary, // Ensures contrast
-              ),
-              child:
-                  Text("ADD TO COLLECTION", style: theme.textTheme.labelLarge),
-            ),
-          ),
-          const SizedBox(height: 16),
           Text('SYNOPSIS', style: theme.textTheme.titleLarge),
           const SizedBox(height: 8),
           Text(movie.overview, style: theme.textTheme.bodyLarge),
@@ -206,7 +194,24 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 ),
                 itemCount: movies.length,
                 itemBuilder: (context, index) {
-                  return MovieCard(movie: movies[index]);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieDetailPage(
+                            movie: MovieDetailService.getMovieDetail(
+                                movies[index].id),
+                            recommendedMovies: MovieRecommendationService
+                                .getMovieRecommendation(movies[index].id),
+                          ),
+                        ),
+                      );
+                    },
+                    child: MovieCard(
+                      movie: movies[index],
+                    ),
+                  );
                 },
               ),
             ],
