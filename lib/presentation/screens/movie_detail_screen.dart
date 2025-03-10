@@ -9,8 +9,7 @@ class MovieDetailPage extends StatefulWidget {
   final Future<MovieCollection?> recommendedMovies;
 
   const MovieDetailPage(
-      {Key? key, required this.movie, required this.recommendedMovies})
-      : super(key: key);
+      {super.key, required this.movie, required this.recommendedMovies});
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();

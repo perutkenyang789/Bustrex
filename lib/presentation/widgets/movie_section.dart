@@ -1,5 +1,8 @@
+import 'package:bustrex/data/services/movie_detail_service.dart';
+import 'package:bustrex/presentation/screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/movie_collection_model.dart';
+import '../../data/services/movie_reccomendation_service.dart';
 import '../widgets/movie_card.dart';
 
 class MovieSection extends StatelessWidget {
@@ -51,10 +54,25 @@ class MovieSection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: MovieCard(
-                      movie: movies[index],
-                      height: height,
-                      aspectRatio: 2 / 3, // Maintain proper poster ratio
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MovieDetailPage(
+                              movie: MovieDetailService.getMovieDetail(
+                                  movies[index].id),
+                              recommendedMovies: MovieRecommendationService
+                                  .getMovieRecommendation(movies[index].id),
+                            ),
+                          ),
+                        );
+                      },
+                      child: MovieCard(
+                        movie: movies[index],
+                        height: height,
+                        aspectRatio: 2 / 3, // Maintain proper poster ratio
+                      ),
                     ),
                   );
                 },

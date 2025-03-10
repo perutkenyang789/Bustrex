@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../data/services/movie_detail_service.dart';
+import '../../data/services/movie_reccomendation_service.dart';
 import '../../data/services/movie_service.dart';
 import '../../data/services/trending_service.dart';
 import '../../data/models/movie_collection_model.dart';
 import '../widgets/movie_card.dart';
 import '../widgets/appbar.dart';
 import '../widgets/movie_section.dart';
+import 'movie_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -76,10 +79,25 @@ class HomeScreenState extends State<HomeScreen> {
                       autoPlayCurve: Curves.fastOutSlowIn,
                     ),
                     itemBuilder: (context, index, realIndex) {
-                      return MovieCard(
-                        movie: movies[index],
-                        height: highlightCardHeight,
-                        aspectRatio: 2 / 3,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MovieDetailPage(
+                                movie: MovieDetailService.getMovieDetail(
+                                    movies[index].id),
+                                recommendedMovies: MovieRecommendationService
+                                    .getMovieRecommendation(movies[index].id),
+                              ),
+                            ),
+                          );
+                        },
+                        child: MovieCard(
+                          movie: movies[index],
+                          height: highlightCardHeight,
+                          aspectRatio: 2 / 3,
+                        ),
                       );
                     },
                   ),
