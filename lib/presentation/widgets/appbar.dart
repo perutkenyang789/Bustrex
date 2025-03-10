@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/profile_screen.dart';
+
 class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BustrexAppBar({super.key});
 
@@ -20,13 +22,21 @@ class BustrexAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.search,
-                    color: theme.colorScheme.onPrimary, size: 24),
+                IconButton(
+                  icon: Icon(Icons.person,
+                      color: theme.colorScheme.onPrimary, size: 24),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen()));
+                  },
+                ),
                 Text(
                   "BUSTREX",
                   style: theme.textTheme.displayLarge,
                 ),
-                Icon(Icons.person,
+                Icon(Icons.search,
                     color: theme.colorScheme.onPrimary, size: 24),
               ],
             ),
