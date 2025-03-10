@@ -18,6 +18,7 @@ class MovieCard extends StatelessWidget {
     final double cardHeight = height ?? 300;
     final double cardWidth = cardHeight * aspectRatio;
     final theme = Theme.of(context);
+    final String backdropPath = movie.backdropPath ?? '';
 
     return Container(
       height: cardHeight,
@@ -37,18 +38,21 @@ class MovieCard extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           // Movie Poster
-          Image.network(
-            'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-            width: cardWidth,
-            height: cardHeight,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => Container(
-              width: cardWidth,
-              height: cardHeight,
-              color: Colors.grey,
-              child: const Center(child: Icon(Icons.broken_image, size: 50)),
-            ),
-          ),
+          backdropPath.isNotEmpty
+              ? Image.network(
+                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                  width: cardWidth,
+                  height: cardHeight,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    width: cardWidth,
+                    height: cardHeight,
+                    color: Colors.grey,
+                    child:
+                        const Center(child: Icon(Icons.broken_image, size: 50)),
+                  ),
+                )
+              : Container(color: Colors.black),
 
           // Gradient Overlay
           Positioned(
